@@ -1,0 +1,84 @@
+{
+  "editor.renderWhitespace": "all",
+  "editor.tabSize": 2,
+  "editor.cursorBlinking": "solid",
+  "editor.renderLineHighlight": "none",
+  "editor.occurrencesHighlight": false,
+  "editor.matchBrackets": "never",
+  "editor.formatOnPaste": false,
+  "editor.minimap.enabled": false,
+  "editor.renderIndentGuides": false,
+  "editor.overviewRulerBorder": false,
+  "editor.suggestSelection": "first",
+  "editor.acceptSuggestionOnEnter": "off",
+  "editor.snippetSuggestions": "top",
+  "editor.renderControlCharacters": false,
+  "editor.gotoLocation.multipleDefinitions": "goto",
+  // "editor.hover.enabled": false,
+  "editor.parameterHints.enabled": false,
+  "editor.fontSize": 13,
+  "editor.quickSuggestions": {
+    "other": false,
+    "comments": false,
+    "strings": false
+  },
+  "workbench.editor.labelFormat": "medium",
+  "workbench.fontAliasing": "antialiased",
+  "workbench.iconTheme": null,
+  "workbench.list.horizontalScrolling": true,
+  "workbench.startupEditor": "none",
+  "workbench.statusBar.visible": true,
+  "workbench.activityBar.visible": true,
+  // "workbench.editor.enablePreview": false,
+  "workbench.editor.closeOnFileDelete": true,
+  "workbench.colorCustomizations": {
+    "editorCursor.foreground": "#f92672",
+    "terminalCursor.foreground": "#ff9700",
+    "terminalCursor.background": "#ff9700",
+  },
+
+  "window.zoomLevel": 0,
+  "window.nativeTabs": true,
+  "window.titleBarStyle": "native",
+
+  "files.insertFinalNewline": true,
+  "files.exclude": {
+    "sales_app/dist": true,
+    "sales_app/tmp": true,
+    "agent_portal/dist": true,
+    "agent_portal/tmp": true,
+    "hapi/hapi_server/log": true,
+    "log": true
+  },
+
+  "search.quickOpen.includeSymbols": true,
+  "search.showLineNumbers": true,
+
+  "diffEditor.ignoreTrimWhitespace": false,
+  "diffEditor.renderSideBySide": true,
+
+  "terminal.integrated.cursorStyle": "line",
+  "terminal.integrated.cursorBlinking": false,
+
+  "explorer.autoReveal": false,
+  "breadcrumbs.enabled": true,
+  "git.enableSmartCommit": true,
+  "liveServer.settings.donotShowInfoMsg": true,
+
+  "bracket-pair-colorizer-2.showHorizontalScopeLine": false,
+  "bracket-pair-colorizer-2.showVerticalScopeLine": false,
+
+  "trailing-spaces.highlightCurrentLine": false,
+  "trailing-spaces.includeEmptyLines": false,
+
+  "indentRainbow.colors": [
+    "rgba(0,0,0,0)",
+    "rgba(0,0,0,0)",
+    "rgba(0,0,0,0)",
+    "rgba(0,0,0,0)"
+  ],
+  "workbench.colorTheme": "Monokai Minimal",
+  "extensions.ignoreRecommendations": true,
+  "extensions.autoCheckUpdates": false,
+  "svg.preview.mode": "svg"
+}
