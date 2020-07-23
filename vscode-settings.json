@@ -43,11 +43,6 @@
 
   "files.insertFinalNewline": true,
   "files.exclude": {
-    "sales_app/dist": true,
-    "sales_app/tmp": true,
-    "agent_portal/dist": true,
-    "agent_portal/tmp": true,
-    "hapi/hapi_server/log": true,
     "log": true
   },
 

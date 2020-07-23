@@ -1,17 +1,23 @@
 include ERB::Util
 extend Rails::ConsoleMethods if defined?(Rails) && Rails.env
+
+alias q exit
+
 Pry.config.pager = false
 
 if File.exist?(File.join(Dir.home, "localpryrc.rb"))
   Pry.toplevel_binding.eval(File.read(File.join(Dir.home, "localpryrc.rb")))
 end
 
-Pry.commands.alias_command "s", "step" rescue nil
-Pry.commands.alias_command "n", "next" rescue nil
-Pry.commands.alias_command "f", "finish" rescue nil
-Pry.commands.alias_command "c", "continue" rescue nil
-Pry.commands.alias_command "regroup", "whereami" rescue nil
-Pry.commands.alias_command "trace", "wtf?" rescue nil
+# https://docs.gitlab.com/ee/development/pry_debugging.html#short-commands
+if defined?(PryByebug)
+  Pry.commands.alias_command "s", "step" rescue nil
+  Pry.commands.alias_command "n", "next" rescue nil
+  Pry.commands.alias_command "f", "finish" rescue nil
+  Pry.commands.alias_command "c", "continue" rescue nil
+  Pry.commands.alias_command "regroup", "whereami" rescue nil
+  Pry.commands.alias_command "trace", "wtf?" rescue nil
+end
 
 if Pry::Prompt.respond_to?(:new)
   Pry.config.prompt = Pry::Prompt.new(

@@ -3,6 +3,7 @@
   email = ridge.sarah@gmail.com
 [core]
   editor = /Applications/Sublime\\ Text.app/Contents/SharedSupport/bin/subl -n -w
+  excludesfile = ~/.gitignore_global
 [filter "lfs"]
   clean = git-lfs clean -- %f
   smudge = git-lfs smudge -- %f
@@ -10,3 +11,9 @@
   required = true
 [pull]
   rebase = false
+[alias]
+  st = status
+  cb = checkout
+  standup = log --since yesterday --oneline --no-merges --author smridge
+[difftool "github"]
+  cmd = github

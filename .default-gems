@@ -1,0 +1,10 @@
+bundler
+debride
+pg
+pry
+pry-byebug
+rubocop
+rubocop-performance
+rubocop-rails
+rubocop-rspec
+solargraph
