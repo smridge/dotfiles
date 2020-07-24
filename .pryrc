@@ -9,14 +9,14 @@ if File.exist?(File.join(Dir.home, "localpryrc.rb"))
   Pry.toplevel_binding.eval(File.read(File.join(Dir.home, "localpryrc.rb")))
 end
 
-# https://docs.gitlab.com/ee/development/pry_debugging.html#short-commands
+# https://github.com/deivid-rodriguez/pry-byebug
 if defined?(PryByebug)
-  Pry.commands.alias_command "s", "step" rescue nil
-  Pry.commands.alias_command "n", "next" rescue nil
-  Pry.commands.alias_command "f", "finish" rescue nil
-  Pry.commands.alias_command "c", "continue" rescue nil
-  Pry.commands.alias_command "regroup", "whereami" rescue nil
-  Pry.commands.alias_command "trace", "wtf?" rescue nil
+  Pry.commands.alias_command "s", "step"
+  Pry.commands.alias_command "n", "next"
+  Pry.commands.alias_command "f", "finish"
+  Pry.commands.alias_command "c", "continue"
+  Pry.commands.alias_command "regroup", "whereami"
+  Pry.commands.alias_command "trace", "wtf?"
 end
 
 if Pry::Prompt.respond_to?(:new)
