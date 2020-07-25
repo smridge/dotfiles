@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 include ERB::Util
 extend Rails::ConsoleMethods if defined?(Rails) && Rails.env
 
@@ -77,4 +79,17 @@ def column_data_type data_type
     SQL
 
   ActiveRecord::Base.connection.exec_query(query)
+end
+
+def find_dups
+  group_by(&:itself).select { |_, value| value.count > 1 }.keys
+end
+
+def find_dups_tally
+  group_by(&:itself).transform_values(&:count).reject { |_, value| value == 1 }
+end
+
+def rand_string string_length
+  characters = [*"A".."Z", *"0".."9"]
+  characters.sample(string_length).join
 end
