@@ -22,8 +22,9 @@ export PS1="\u@\h \[\033[32m\]\w\[\033[33m\]\$(parse_git_branch)\[\033[00m\] $ "
 status() { echo -e "\n\033[1m$(git status)\033[0m" && echo -e "\n\033[1;2;4mLast 20 Commits\033[0m" && deets; }
 deets() { git log --color --pretty=format:'%Cred%h%Creset - %C(green)%ar%Creset, %C(bold blue)%an%Creset : %C(dim)%s%Creset' | head -n 20; }
 
-pull() { git pull origin master; }
+pull() { git pull origin "$@"; }
 master() { git checkout master; }
+main() { git checkout main; }
 lb() { git branch; }
 alias cb="git checkout"
 alias mkbranch="git checkout -b"
