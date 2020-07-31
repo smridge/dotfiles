@@ -1,5 +1,7 @@
 .DS_Store*
 .tool-versions
 .env.local
-database.bak
-latest.dump
+*.bak
+*.dump
+*.sqlite
+*.sqldump
