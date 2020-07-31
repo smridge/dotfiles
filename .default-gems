@@ -8,3 +8,4 @@ rubocop-performance
 rubocop-rails
 rubocop-rspec
 solargraph
+env_compare
