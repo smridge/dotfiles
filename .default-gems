@@ -1,5 +1,7 @@
 bundler
 debride
+env_compare
+meta_request
 pg
 pry
 pry-byebug
@@ -8,4 +10,3 @@ rubocop-performance
 rubocop-rails
 rubocop-rspec
 solargraph
-env_compare
