@@ -1,0 +1,81 @@
+## install necessities
+brew install bash
+brew install git
+brew install heroku
+brew install imagemagick
+
+### postgres
+brew install postgres
+brew install postgis
+brew services start postgresql
+
+### redis
+brew install redis
+brew services start redis
+
+## language version management
+brew install coreutils curl git
+brew install asdf
+
+## install node
+asdf plugin add nodejs
+asdf install nodejs latest
+
+## install ruby
+asdf plugin add ruby
+asdf install ruby latest
+
+
+## install apps - https://formulae.brew.sh/cask/
+brew cask install visual-studio-code
+brew cask install google-chrome
+brew cask install firefox
+brew cask install atom
+brew cask install textmate
+brew cask install sublime-merge
+brew cask install sublime-text
+brew cask install postico
+brew cask install dropbox
+brew cask install slack
+brew cask install zoomus
+brew cask install insomnia
+
+## install VS Code Extensions
+code --install-extension adamwalzer.scss-lint
+code --install-extension alefragnani.Bookmarks
+code --install-extension alefragnani.project-manager
+code --install-extension alexdima.copy-relative-path
+code --install-extension castwide.solargraph
+code --install-extension christian-kohler.npm-intellisense
+code --install-extension ciebiada.ruby-copy-reference
+code --install-extension codezombiech.gitignore
+code --install-extension CoenraadS.bracket-pair-colorizer-2
+code --install-extension deerawan.vscode-dash
+code --install-extension donjayamanne.git-extension-pack
+code --install-extension donjayamanne.githistory
+code --install-extension dunstontc.viml
+code --install-extension eamodio.gitlens
+code --install-extension jock.svg
+code --install-extension lamartire.git-indicators
+code --install-extension leizongmin.node-module-intellisense
+code --install-extension misogi.ruby-rubocop
+code --install-extension ms-vscode.sublime-keybindings
+code --install-extension ms-vscode.typescript-javascript-grammar
+code --install-extension oderwat.indent-rainbow
+code --install-extension ritwickdey.LiveServer
+code --install-extension SarahRidge.vscode-monokai-minimal
+code --install-extension SarahRidge.vscode-rails-syntax
+code --install-extension SarahRidge.vscode-ruby-syntax
+code --install-extension shardulm94.trailing-spaces
+code --install-extension shinworks.tmplcolorizer
+code --install-extension sysoev.vscode-open-in-github
+code --install-extension Togusa09.tmlanguage
+code --install-extension traBpUkciP.vscode-npm-scripts
+code --install-extension VisualStudioExptTeam.vscodeintellicode
+code --install-extension waderyan.gitblame
+code --install-extension wmaurer.change-case
+code --install-extension ziyasal.vscode-open-in-github
+
+
+## heroku
+heroku plugins:install heroku-cli-oauth
