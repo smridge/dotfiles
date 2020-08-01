@@ -7,8 +7,8 @@ alias q exit
 
 Pry.config.pager = false
 
-if File.exist?(File.join(Dir.home, "localpryrc.rb"))
-  Pry.toplevel_binding.eval(File.read(File.join(Dir.home, "localpryrc.rb")))
+if File.exist?(File.join(Dir.home, ".local.pryrc.rb"))
+  Pry.toplevel_binding.eval(File.read(File.join(Dir.home, ".local.pryrc.rb")))
 end
 
 # https://github.com/deivid-rodriguez/pry-byebug

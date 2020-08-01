@@ -6,6 +6,7 @@ downloads() { cd ~/Downloads; }
 desktop() { cd ~/Desktop; }
 mkdiro() { mkdir -p "$@" && cd "$@" && pwd && finder; }
 
+
 # editors
 atom() { atom .; }
 mate() { mate .; }
@@ -14,7 +15,7 @@ vs() { code .; }
 vslist() { code --list-extensions; }
 
 
-# GIT
+# git
 ## show branch & path in terminal
 parse_git_branch() { git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'; }
 export PS1="\u@\h \[\033[32m\]\w\[\033[33m\]\$(parse_git_branch)\[\033[00m\] $ "
@@ -38,6 +39,7 @@ alias mkbranch="git checkout -b"
 alias push="git push -u origin"
 alias squash="git rebase --interactive HEAD~2"
 alias standup="git standup"
+
 
 # rails
 ## server
