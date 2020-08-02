@@ -29,14 +29,15 @@ bash ./install.sh
 ## Other
 - Setup `.dotfiles`
 
-## Tools
-- [asdf](https://asdf-vm.com/#/core-commands) for Language Version Management
+## Tool References
+- [asdf](https://asdf-vm.com/#/core-commands)
+- [regex 101](https://regex101.com)
+- [crontab](https://crontab.guru)
 
 
 ### Troubleshooting
 - `Cant find gem bundler (>= 0.a) with executable bundle`
   - https://bundler.io/blog/2019/05/14/solutions-for-cant-find-gem-bundler-with-executable-bundle.html
-
 
 ### TODO
 - Setup automated `.dotfiles` creation.
