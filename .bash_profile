@@ -30,6 +30,8 @@ lb() { git branch; }
 main() { git checkout main; }
 master() { git checkout master; }
 pull() { git pull origin "$@"; }
+branch() { git branch 2>/dev/null | grep '^*' | colrm 1 2; }
+pushb() { git push -u origin $branch; }
 alias add="git add ."
 alias amend="git commit --amend -m"
 alias cb="git checkout"
