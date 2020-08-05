@@ -44,8 +44,9 @@ $ vim
 
 ## Tool References
 - [asdf](https://asdf-vm.com/#/core-commands)
-- [regex 101](https://regex101.com)
 - [crontab](https://crontab.guru)
+- [JSON Schema Store](https://www.schemastore.org/json/)
+- [regex 101](https://regex101.com)
 
 
 ### Troubleshooting
