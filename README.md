@@ -18,6 +18,19 @@ cd dotfiles
 bash ./install.sh
 ```
 
+### Install [vim-plug](https://github.com/junegunn/vim-plug)
+```
+curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+```
+
+Make and Copy `.vimrc` for Plugins
+
+```
+$ vim
+:PlugInstall
+```
+
 ## Install Browser Previewers
 - [Google Canary](https://www.google.com/chrome/canary/thank-you.html?statcb=0&installdataindex=empty&defaultbrowser=0)
 - [Safari Technolgy Preview](https://developer.apple.com/safari/technology-preview/)
