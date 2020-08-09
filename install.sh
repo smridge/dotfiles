@@ -59,7 +59,6 @@ code --install-extension jock.svg
 code --install-extension lamartire.git-indicators
 code --install-extension leizongmin.node-module-intellisense
 code --install-extension misogi.ruby-rubocop
-code --install-extension ms-vscode.sublime-keybindings
 code --install-extension ms-vscode.typescript-javascript-grammar
 code --install-extension oderwat.indent-rainbow
 code --install-extension ritwickdey.LiveServer
