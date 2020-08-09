@@ -48,6 +48,28 @@ $ vim
 - [JSON Schema Store](https://www.schemastore.org/json/)
 - [regex 101](https://regex101.com)
 
+## VS Code Keybindings
+### Custom
+- Redo: <kbd>command</kbd> <kbd>Y</kbd>
+- Delete Current Line or Selected Lines: <kbd>command</kbd> <kbd>D</kbd> <kbd>D</kbd>
+- Delete everything Left of Cursor for current line: <kbd>command</kbd> <kbd>D</kbd> <kbd>L</kbd>
+- Delete everything Right of Cursor for current line: <kbd>command</kbd> <kbd>D</kbd> <kbd>R</kbd>
+- Copy Relative Path: <kbd>command</kbd> <kbd>K</kbd> <kbd>P</kbd>
+- Highlight Current Word and grow: <kbd>command</kbd> <kbd>H</kbd>
+- Add Cursor to Next Match: <kbd>shift</kbd> <kbd>command</kbd> <kbd>down</kbd>
+- Cursor Word Start Right (Next): <kbd>shift</kbd> <kbd>option</kbd> <kbd>E</kbd>
+- Cursor Word Start Left (Back): <kbd>option</kbd> <kbd>A</kbd>
+- Copy and Paste current line/selection below: <kbd>option</kbd> <kbd>Y</kbd> <kbd>P</kbd>
+
+### Default
+- Go to File: <kbd>command</kbd> <kbd>P</kbd>
+- Copy Full Path: <kbd>command</kbd> <kbd>option</kbd> <kbd>P</kbd>
+- Cursor Start of Line: <kbd>control</kbd> <kbd>A</kbd>
+- Cursor End of Line: <kbd>control</kbd> <kbd>E</kbd>
+- Transform Upcase: <kbd>command</kbd> <kbd>K</kbd> <kbd>U</kbd>
+- Transform downcase: <kbd>command</kbd> <kbd>K</kbd> <kbd>L</kbd>
+- Select Line: <kbd>command</kbd> <kbd>L</kbd>
+
 
 ### Troubleshooting
 - `Cant find gem bundler (>= 0.a) with executable bundle`
