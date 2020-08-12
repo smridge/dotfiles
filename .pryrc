@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require "erb"
+
 include ERB::Util
 extend Rails::ConsoleMethods if defined?(Rails) && Rails.env
 
