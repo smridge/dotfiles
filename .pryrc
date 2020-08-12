@@ -32,11 +32,13 @@ else
 end
 
 def app_name
-  name = Pry::Helpers::Text.bold(File.basename(Rails.root))
+  name = Pry::Helpers::Text.bold(File.basename(Dir.getwd))
   Pry::Helpers::Text.cyan(name)
 end
 
 def formatted_env
+  return Pry::Helpers::Text.green(Pry::Helpers::Text.bold("pry")) unless defined?(Rails)
+
   case Rails.env
   when "production"
     bold_upcased_env = Pry::Helpers::Text.bold(Rails.env.upcase)
