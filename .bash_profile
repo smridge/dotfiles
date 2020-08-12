@@ -45,9 +45,9 @@ alias standup="git standup"
 
 # rails
 ## server
-alias puma="bundle exec rails s puma"
-alias puma3001="bundle exec rails s puma -p 3001"
-alias puma80="rails server Puma -b 0.0.0.0 -p 80 -e development"
+alias rpuma="bundle exec rails s puma"
+alias rpuma3001="bundle exec rails s puma -p 3001"
+alias rpuma80="rails server Puma -b 0.0.0.0 -p 80 -e development"
 alias lvh="bundle exec rails s -b lvh.me"
 alias pumashow="ps aux | grep puma"
 alias killpuma="pkill -9 -f puma"
