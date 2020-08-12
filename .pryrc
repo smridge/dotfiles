@@ -62,7 +62,7 @@ def time times = 1
   ret
 end
 
-def methods klass
+def klass_methods klass
   klass.public_instance_methods - Object.public_instance_methods
 end
 
