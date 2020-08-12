@@ -73,7 +73,11 @@ $ vim
 
 ### Troubleshooting
 - `Cant find gem bundler (>= 0.a) with executable bundle`
+  - run: `gem update --system`
   - https://bundler.io/blog/2019/05/14/solutions-for-cant-find-gem-bundler-with-executable-bundle.html
+
+- `asdf: No preset version installed for command xyz`
+  - run: `asdf reshim`
 
 ### TODO
 - Setup automated `.dotfiles` creation.
