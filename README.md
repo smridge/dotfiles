@@ -79,5 +79,11 @@ $ vim
 - `asdf: No preset version installed for command xyz`
   - run: `asdf reshim`
 
+- Running:
+  ```
+  $ bundle update puma`An error occurred while installing puma
+  ```
+  - run bash alias: `redo_xcodetools`
+
 ### TODO
 - Setup automated `.dotfiles` creation.
