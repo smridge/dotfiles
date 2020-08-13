@@ -3,7 +3,7 @@
 require "erb"
 
 include ERB::Util
-extend Rails::ConsoleMethods if defined?(Rails) && Rails.env
+extend Rails::ConsoleMethods if defined?(Rails) && Rails.env && Rails.root
 
 alias q exit
 
