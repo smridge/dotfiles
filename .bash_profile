@@ -1,3 +1,8 @@
+[[ -s "$HOME/.local.bash_profile" ]] && source "$HOME/.local.bash_profile"
+
+# brew
+export PATH="/usr/local/sbin:$PATH"
+
 reload() { . ~/.bash_profile; }
 home() { cd ~; }
 finder() { open -a Finder ./; }
