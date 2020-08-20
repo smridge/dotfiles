@@ -60,6 +60,7 @@ $ vim
 - Cursor Word Start Right (Next): <kbd>shift</kbd> <kbd>option</kbd> <kbd>E</kbd>
 - Cursor Word Start Left (Back): <kbd>option</kbd> <kbd>A</kbd>
 - Copy and Paste current line/selection below: <kbd>option</kbd> <kbd>Y</kbd> <kbd>P</kbd>
+- Open settings.json: <kbd>⌥ option</kbd> <kbd>J</kbd>
 
 ### Default
 - Go to File: <kbd>command</kbd> <kbd>P</kbd>
