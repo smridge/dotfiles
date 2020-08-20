@@ -71,6 +71,10 @@ alias migrate="bundle exec rails db:migrate"
 alias be="bundle exec"
 ctmp() { rake tmp:clear && rake tmp:cache:clear && rake tmp:sessions:clear && rake tmp:sockets:clear; }
 
+## simplecov
+alias cov="open coverage/index.html"
+
+
 # tool issues
 alias redo_xcodetools="sudo rm -rf /Library/Developer/CommandLineTools && sudo xcode-select --install"
 
