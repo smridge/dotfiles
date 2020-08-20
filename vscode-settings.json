@@ -22,6 +22,8 @@
     "comments": false,
     "strings": false
   },
+  "workbench.colorTheme": "Monokai Minimal",
+  "workbench.settings.openDefaultKeybindings": true,
   "workbench.editor.labelFormat": "medium",
   "workbench.fontAliasing": "antialiased",
   "workbench.iconTheme": null,
@@ -34,7 +36,7 @@
   "workbench.colorCustomizations": {
     "editorCursor.foreground": "#f92672",
     "terminalCursor.foreground": "#ff9700",
-    "terminalCursor.background": "#ff9700",
+    "terminalCursor.background": "#ff9700"
   },
 
   "window.zoomLevel": 0,
@@ -56,6 +58,11 @@
   "terminal.integrated.cursorBlinking": false,
 
   "explorer.autoReveal": false,
+  "explorer.compactFolders": false,
+
+  "extensions.ignoreRecommendations": true,
+  "extensions.autoCheckUpdates": false,
+
   "breadcrumbs.enabled": true,
   "git.enableSmartCommit": true,
   "liveServer.settings.donotShowInfoMsg": true,
@@ -72,8 +79,6 @@
     "rgba(0,0,0,0)",
     "rgba(0,0,0,0)"
   ],
-  "workbench.colorTheme": "Monokai Minimal",
-  "extensions.ignoreRecommendations": true,
-  "extensions.autoCheckUpdates": false,
+
   "svg.preview.mode": "svg"
 }
