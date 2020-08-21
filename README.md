@@ -85,3 +85,6 @@ $ vim
 
 - `ActiveRecord::ProtectedEnvironmentError: You are attempting to run a destructive action against your 'production' database.`
   - run: `bundle exec rake db:environment:set RACK_ENV=development`
+
+- `PG::ConnectionBad: FATAL:  role "postgres" does not exist`
+  - run: `createuser -s -r postgres`
