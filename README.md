@@ -83,5 +83,5 @@ $ vim
 - `bundle update: An error occurred while installing puma`
   - run bash alias: `redo_xcodetools`
 
-### TODO
-- Setup automated `.dotfiles` creation.
+- `ActiveRecord::ProtectedEnvironmentError: You are attempting to run a destructive action against your 'production' database.`
+  - run: `bundle exec rake db:environment:set RACK_ENV=development`
