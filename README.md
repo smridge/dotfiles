@@ -88,3 +88,6 @@ $ vim
 
 - `PG::ConnectionBad: FATAL:  role "postgres" does not exist`
   - run: `createuser -s -r postgres`
+
+- `bundle exec rails c` not loading (no error, instead seems to not recognize command)
+  - run `bin/spring stop`
