@@ -79,3 +79,5 @@ code --install-extension ziyasal.vscode-open-in-github
 
 ## heroku
 heroku plugins:install heroku-cli-oauth
+brew tap thoughtbot/formulae
+brew install parity
