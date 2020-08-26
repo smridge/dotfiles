@@ -60,7 +60,8 @@ $ vim
 - Cursor Word Start Right (Next): <kbd>shift</kbd> <kbd>option</kbd> <kbd>E</kbd>
 - Cursor Word Start Left (Back): <kbd>option</kbd> <kbd>A</kbd>
 - Copy and Paste current line/selection below: <kbd>option</kbd> <kbd>Y</kbd> <kbd>P</kbd>
-- Open settings.json: <kbd>⌥ option</kbd> <kbd>J</kbd>
+- Open settings.json: <kbd>option</kbd> <kbd>J</kbd>
+- Inspect Language Definition/TextMate Scope: <kbd>option</kbd> <kbd>T</kbd>
 
 ### Default
 - Go to File: <kbd>command</kbd> <kbd>P</kbd>
