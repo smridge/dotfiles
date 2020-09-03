@@ -85,6 +85,10 @@ def column_data_type data_type
   ActiveRecord::Base.connection.exec_query(query)
 end
 
+def pg_version
+  ActiveRecord::Base.connection.select_value('select version()')
+end
+
 def find_dups
   group_by(&:itself).select { |_, value| value.count > 1 }.keys
 end
