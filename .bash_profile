@@ -14,7 +14,7 @@ mkdiro() { mkdir -p "$@" && cd "$@" && pwd && finder; }
 
 # editors
 atom() { atom .; }
-mate() { mate .; }
+tmate() { mate .; }
 sub() { sublime .; }
 vs() { code .; }
 vslist() { code --list-extensions; }
