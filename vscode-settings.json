@@ -44,10 +44,12 @@
   "window.titleBarStyle": "native",
 
   "files.insertFinalNewline": true,
-  "files.exclude": {
+
+  "search.exclude": {
+    "**.bak": true,
+    "**.dump": true,
     "log": true
   },
-
   "search.quickOpen.includeSymbols": true,
   "search.showLineNumbers": true,
 
