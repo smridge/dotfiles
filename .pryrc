@@ -89,6 +89,16 @@ def pg_version
   ActiveRecord::Base.connection.select_value('select version()')
 end
 
+def pg_exts
+  ActiveRecord::Base.connection.select_value('select * from pg_extension')
+end
+
+def db_reset_sequences
+  ActiveRecord::Base.connection.tables.each do |table|
+    ActiveRecord::Base.connection.reset_pk_sequence!(table)
+  end
+end
+
 def find_dups
   group_by(&:itself).select { |_, value| value.count > 1 }.keys
 end
