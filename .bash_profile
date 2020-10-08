@@ -47,6 +47,7 @@ alias push="git push -u origin"
 alias squash="git rebase --interactive HEAD~2"
 alias standup="git standup"
 alias gitreset="git reset --hard HEAD^"
+alias commitempty="git commit --allow-empty -m 'Trigger Build'"
 
 
 # rails
