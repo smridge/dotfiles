@@ -107,7 +107,6 @@ def find_dups_tally
   group_by(&:itself).transform_values(&:count).reject { |_, value| value == 1 }
 end
 
-def rand_string string_length
-  characters = [*"A".."Z", *"0".."9"]
-  characters.sample(string_length).join
+def rand_string length
+  SecureRandom.alphanumeric(length)
 end
