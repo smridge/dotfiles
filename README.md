@@ -91,4 +91,8 @@ $ vim
   - run: `createuser -s -r postgres`
 
 - `bundle exec rails c` not loading (no error, instead seems to not recognize command)
-  - run `bin/spring stop`
+  - run: `bin/spring stop`
+
+- `psql:..structure.sql: ERROR:  could not open extension control file "../.asdf/installs/postgres/11.8/share/extension/uuid-ossp.control": No such file or directory`
+  - see: https://stackoverflow.com/questions/20810921/cant-use-uuid-and-create-an-extension-to-use-it/51918361#51918361
+  - should be resolved going forward with option set in `.asdf-postgres-configure-options`
