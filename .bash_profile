@@ -3,6 +3,9 @@
 # brew
 export PATH="/usr/local/sbin:$PATH"
 
+# postgres
+export PGHOST=localhost
+
 reload() { . ~/.bash_profile; }
 home() { cd ~; }
 finder() { open -a Finder ./; }
