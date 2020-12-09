@@ -80,6 +80,21 @@ alias cov="open coverage/index.html"
 # tool issues
 alias redo_xcodetools="sudo rm -rf /Library/Developer/CommandLineTools && sudo xcode-select --install"
 
+# install postgis `getpostgis 3.0.0`
+# http://www.thinkingco.de/posts/different-versions-of-postgis-with-asdf-postgres
+function getpostgis () {
+    wget -q -P tmp/ https://github.com/postgis/postgis/archive/"$@".tar.gz
+    tar xvzf tmp/"$@".tar.gz -C tmp/
+    cd tmp/postgis-"$@"
+    if [[ ! -a ./configure ]]; then
+      ./autogen.sh
+    fi
+    eval ./configure `pg_config --configure`
+    make
+    make install
+    cd ../..
+    rm -rf tmp/
+}
 
 # asdf for language version management
 . $(brew --prefix asdf)/asdf.sh

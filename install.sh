@@ -4,12 +4,7 @@ brew install git
 brew install heroku
 brew install imagemagick
 
-### postgres
-brew install postgres
-brew install postgis
-brew services start postgresql
-
-### redis
+## redis
 brew install redis
 brew services start redis
 
@@ -25,6 +20,10 @@ asdf install nodejs latest
 ## install ruby
 asdf plugin add ruby
 asdf install ruby latest
+
+## install postgres
+asdf plugin add postgres
+asdf install postgres latest
 
 
 ## install apps - https://formulae.brew.sh/cask/
