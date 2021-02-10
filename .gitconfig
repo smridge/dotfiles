@@ -18,3 +18,5 @@
   standup = log --since yesterday --oneline --no-merges --author smridge
 [difftool "github"]
   cmd = github
+[rebase]
+  instructionFormat = [%an] %s
