@@ -20,3 +20,15 @@
   cmd = github
 [rebase]
   instructionFormat = [%an] %s
+[init]
+  defaultBranch = main
+
+# https://github.com/dandavison/delta
+[pager]
+  diff = delta
+  log = delta
+  reflog = delta
+  show = delta
+[delta]
+  syntax-theme = Monokai Extended
+  navigate = true
