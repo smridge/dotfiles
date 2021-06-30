@@ -51,6 +51,7 @@ alias squash="git rebase --interactive HEAD~2"
 alias standup="git standup"
 alias gitreset="git reset --hard HEAD^"
 alias commitempty="git commit --allow-empty -m 'Trigger Build'"
+alias listening="sudo lsof -iTCP -sTCP:LISTEN -n -P"
 
 
 # rails
