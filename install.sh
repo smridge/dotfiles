@@ -4,6 +4,7 @@ brew install git
 brew install heroku
 brew install imagemagick
 brew install git-delta
+brew install ripgrep
 
 ## redis
 brew install redis
