@@ -29,18 +29,21 @@ asdf install postgres latest
 
 
 ## install apps - https://formulae.brew.sh/cask/
-brew cask install visual-studio-code
-brew cask install google-chrome
-brew cask install firefox
+brew cask install appcleaner
 brew cask install atom
-brew cask install textmate
+brew cask install docker
+brew cask install dropbox
+brew cask install firefox
+brew cask install google-chrome
+brew cask install insomnia
+brew cask install postico
+brew cask install postman
+brew cask install slack
 brew cask install sublime-merge
 brew cask install sublime-text
-brew cask install postico
-brew cask install dropbox
-brew cask install slack
-brew cask install zoomus
-brew cask install insomnia
+brew cask install textmate
+brew cask install visual-studio-code
+brew cask install zoom
 
 ## install VS Code Extensions
 code --install-extension adamwalzer.scss-lint
