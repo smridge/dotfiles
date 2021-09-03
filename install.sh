@@ -46,23 +46,28 @@ brew cask install visual-studio-code
 brew cask install zoom
 
 ## install VS Code Extensions
+code --install-extension 4ops.terraform
 code --install-extension adamwalzer.scss-lint
 code --install-extension alefragnani.Bookmarks
 code --install-extension alefragnani.project-manager
 code --install-extension alexdima.copy-relative-path
+code --install-extension anikethsaha.htmllinter
 code --install-extension castwide.solargraph
 code --install-extension christian-kohler.npm-intellisense
 code --install-extension ciebiada.ruby-copy-reference
 code --install-extension codezombiech.gitignore
 code --install-extension CoenraadS.bracket-pair-colorizer-2
+code --install-extension dbaeumer.vscode-eslint
 code --install-extension deerawan.vscode-dash
 code --install-extension donjayamanne.git-extension-pack
 code --install-extension donjayamanne.githistory
 code --install-extension dunstontc.viml
 code --install-extension eamodio.gitlens
+code --install-extension GitHub.github-vscode-theme
 code --install-extension jock.svg
 code --install-extension lamartire.git-indicators
 code --install-extension leizongmin.node-module-intellisense
+code --install-extension mathiasfrohlich.Kotlin
 code --install-extension misogi.ruby-rubocop
 code --install-extension ms-vscode.typescript-javascript-grammar
 code --install-extension oderwat.indent-rainbow
