@@ -13,6 +13,7 @@ dropbox() { cd ~/Dropbox; }
 downloads() { cd ~/Downloads; }
 desktop() { cd ~/Desktop; }
 mkdiro() { mkdir -p "$@" && cd "$@" && pwd && finder; }
+mime() { file -b --mime "$@"; }
 
 
 # editors
