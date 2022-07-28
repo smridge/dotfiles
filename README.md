@@ -80,6 +80,7 @@ $ vim
 
 - `asdf: No preset version installed for command xyz`
   - run: `asdf reshim`
+  - also try: `rm -rf ~/.asdf/shims; asdf reshim`
 
 - `bundle update: An error occurred while installing puma`
   - run bash alias: `redo_xcodetools`
