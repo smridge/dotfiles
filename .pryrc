@@ -110,3 +110,91 @@ end
 def rand_string length
   SecureRandom.alphanumeric(length)
 end
+
+# https://stackoverflow.com/a/9782550/7477016
+def git_stats(sort: :total)
+  impact = {}
+
+  IO.popen("git log --pretty=format:\"%an\" --shortstat #{ARGV.join(' ')}") do |file|
+    prev_line = ''
+    while (line = file.gets)
+      changes = /(\d+) insertion.* (\d+) deletion/.match(line)
+
+      if changes
+        impact[prev_line] ||= {}
+        impact[prev_line][:additions] ||= 0
+        impact[prev_line][:additions] += changes[1].to_i
+        impact[prev_line][:deletions] ||= 0
+        impact[prev_line][:deletions] += changes[2].to_i
+        impact[prev_line][:total] ||= 0
+        impact[prev_line][:total] += changes[1].to_i + changes[2].to_i
+        impact[prev_line][:diff] ||= 0
+        impact[prev_line][:diff] += changes[1].to_i - changes[2].to_i
+      end
+
+      prev_line = line # Names are on a line of their own, just before the stats
+    end
+  end
+
+  impact.each do |author, hash|
+    hash[:deletion_percent] = (hash[:deletions].fdiv(hash[:total]) * 100).round(2)
+    hash[:addition_percent] = (hash[:additions].fdiv(hash[:total]) * 100).round(2)
+  end
+
+  impact.transform_keys! { |key| key.strip.downcase }
+
+  $stdout.puts(
+    format(
+      "%<author>-40s %<additions>-11s %<deletions>-11s %<diff>-10s %<total>-10s %<deletion_percent>-10s %<addition_percent>-10s",
+      {
+        author: "author",
+        additions: "inserts",
+        deletions: "deletes",
+        total: "total",
+        diff: "diff",
+        deletion_percent: "delete %",
+        addition_percent: "insert %"
+      }
+    )
+  )
+
+  $stdout.puts "-" * 106
+
+  if sort == :author
+    impact.sort_by { |author, _hash| author }.each do |author, hash|
+      $stdout.puts(
+        format(
+          "%<author>-40s +%<additions>-10s -%<deletions>-10s %<diff>-10s %<total>-10s %<deletion_percent>-10s %<addition_percent>-10s",
+          {
+            author: author,
+            additions: hash[:additions],
+            deletions: hash[:deletions],
+            total: hash[:total],
+            diff: hash[:diff],
+            deletion_percent: hash[:deletion_percent],
+            addition_percent: hash[:addition_percent]
+          }
+        )
+      )
+    end
+  else
+    impact.sort_by { |_author, hash| hash[sort] }.reverse_each do |author, hash|
+      $stdout.puts(
+        format(
+          "%<author>-40s +%<additions>-10s -%<deletions>-10s %<diff>-10s %<total>-10s %<deletion_percent>-10s %<addition_percent>-10s",
+          {
+            author: author,
+            additions: hash[:additions],
+            deletions: hash[:deletions],
+            total: hash[:total],
+            diff: hash[:diff],
+            deletion_percent: hash[:deletion_percent],
+            addition_percent: hash[:addition_percent]
+          }
+        )
+      )
+    end
+  end
+
+  nil
+end
