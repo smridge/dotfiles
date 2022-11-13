@@ -44,14 +44,16 @@ pushb() { git push -u origin $branch; }
 alias add="git add ."
 alias amend="git commit --amend -m"
 alias cb="git checkout"
-alias db="git branch -D"
 alias commit="git commit -am"
+alias commitempty="git commit --allow-empty -m 'Trigger Build'"
+alias db="git branch -D"
+alias gitreset="git reset --hard HEAD^"
 alias mkbranch="git checkout -b"
 alias push="git push -u origin"
+alias scommit="git commit -S -am"
 alias squash="git rebase --interactive HEAD~2"
 alias standup="git standup"
-alias gitreset="git reset --hard HEAD^"
-alias commitempty="git commit --allow-empty -m 'Trigger Build'"
+
 alias listening="sudo lsof -iTCP -sTCP:LISTEN -n -P"
 
 

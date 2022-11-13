@@ -1,6 +1,8 @@
 ## GitHub
 - [Generate SSH Key](https://docs.github.com/en/github/authenticating-to-github/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent)
-- [Get SSH Key on GitHub](https://docs.github.com/en/github/authenticating-to-github/adding-a-new-ssh-key-to-your-github-account)
+- [Add SSH Key to GitHub](https://docs.github.com/en/github/authenticating-to-github/adding-a-new-ssh-key-to-your-github-account)
+- [Generate GPG Key](https://docs.github.com/en/authentication/managing-commit-signature-verification/generating-a-new-gpg-key)
+- [Add GPG Key to GitHub](https://docs.github.com/en/authentication/managing-commit-signature-verification/adding-a-gpg-key-to-your-github-account)
 
 ## Basics
 ### Install Brew
@@ -30,11 +32,6 @@ Make and Copy `.vimrc` for Plugins
 $ vim
 :PlugInstall
 ```
-
-## Install Browser Previewers
-- [Google Canary](https://www.google.com/chrome/canary/thank-you.html?statcb=0&installdataindex=empty&defaultbrowser=0)
-- [Safari Technolgy Preview](https://developer.apple.com/safari/technology-preview/)
-- [Firefox Nightly](https://www.mozilla.org/en-US/firefox/channel/desktop/)
 
 ## Install Chrome Extensions
 - [RailsPanel](https://chrome.google.com/webstore/detail/railspanel/gjpfobpafnhjhbajcjgccbbdofdckggg?hl=en-US)

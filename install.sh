@@ -5,6 +5,7 @@ brew install heroku
 brew install imagemagick
 brew install git-delta
 brew install ripgrep
+brew install gnupg
 
 ## redis
 brew install redis
@@ -29,21 +30,25 @@ asdf install postgres latest
 
 
 ## install apps - https://formulae.brew.sh/cask/
-brew cask install appcleaner
-brew cask install atom
-brew cask install docker
-brew cask install dropbox
-brew cask install firefox
-brew cask install google-chrome
-brew cask install insomnia
-brew cask install postico
-brew cask install postman
-brew cask install slack
-brew cask install sublime-merge
-brew cask install sublime-text
-brew cask install textmate
-brew cask install visual-studio-code
-brew cask install zoom
+brew tap homebrew/cask-versions
+
+brew install --cask appcleaner
+brew install --cask docker
+brew install --cask dropbox
+brew install --cask firefox
+brew install --cask firefox-nightly
+brew install --cask google-chrome
+brew install --cask google-chrome-canary
+brew install --cask insomnia
+brew install --cask postico
+brew install --cask postman
+brew install --cask safari-technology-preview
+brew install --cask slack
+brew install --cask sublime-merge
+brew install --cask sublime-text
+brew install --cask textmate
+brew install --cask visual-studio-code
+brew install --cask zoom
 
 ## install VS Code Extensions
 code --install-extension 4ops.terraform
