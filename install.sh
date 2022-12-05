@@ -28,6 +28,10 @@ asdf install ruby latest
 asdf plugin add postgres
 asdf install postgres latest
 
+## install yarn
+asdf plugin-add yarn
+asdf install yarn latest
+
 
 ## install apps - https://formulae.brew.sh/cask/
 brew tap homebrew/cask-versions
