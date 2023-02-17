@@ -104,6 +104,6 @@ function getpostgis () {
 }
 
 # asdf for language version management
-. $(brew --prefix asdf)/asdf.sh
+. $(brew --prefix asdf)/libexec/asdf.sh
 
-. /usr/local/opt/asdf/etc/bash_completion.d/asdf.bash
+. $(brew --prefix asdf)/etc/bash_completion.d/asdf.bash
