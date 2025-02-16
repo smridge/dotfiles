@@ -7,17 +7,29 @@ brew install git-delta
 brew install ripgrep
 brew install gnupg
 
+# asdf nodejs
+brew install gpg gawk
+
+# asdf ruby
+brew install zlib
+brew install libyaml
+
+# asdf postgres
+brew install gcc
+brew install curl
+brew install ossp-uuid
+brew install pkg-config
+
 ## redis
 brew install redis
 brew services start redis
 
 ## language version management
-brew install coreutils curl git
+brew install coreutils
 brew install asdf
 
 ## install node
 asdf plugin add nodejs
-bash ~/.asdf/plugins/nodejs/bin/import-release-team-keyring
 asdf install nodejs latest
 
 ## install ruby
@@ -29,7 +41,7 @@ asdf plugin add postgres
 asdf install postgres latest
 
 ## install yarn
-asdf plugin-add yarn
+asdf plugin add yarn
 asdf install yarn latest
 
 
@@ -40,9 +52,9 @@ brew install --cask appcleaner
 brew install --cask docker
 brew install --cask dropbox
 brew install --cask firefox
-brew install --cask firefox-nightly
+brew install --cask firefox@nightly
 brew install --cask google-chrome
-brew install --cask google-chrome-canary
+brew install --cask google-chrome@canary
 brew install --cask insomnia
 brew install --cask postico
 brew install --cask postman
@@ -50,7 +62,6 @@ brew install --cask safari-technology-preview
 brew install --cask slack
 brew install --cask sublime-merge
 brew install --cask sublime-text
-brew install --cask textmate
 brew install --cask visual-studio-code
 brew install --cask zoom
 

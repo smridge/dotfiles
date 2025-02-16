@@ -1,9 +1,7 @@
-bundler
 bundle-audit
 debride
 env_compare
 meta_request
-pg
 pry
 pry-byebug
 rubocop

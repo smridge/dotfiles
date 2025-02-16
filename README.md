@@ -7,7 +7,7 @@
 ## Basics
 ### Install Brew
 ```
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 ```
 
 ### Set Bash as Default
@@ -88,6 +88,20 @@ $ vim
 - `PG::ConnectionBad: FATAL:  role "postgres" does not exist`
   - run: `createuser -s -r postgres`
   - or see this: https://gist.github.com/ekumachidi/aac9316496fb2ca84dcef00920fede9b
+    ```
+    psql -U postgres
+
+    postgres=# create user <username>;
+    CREATE ROLE
+    postgres=# alter user <username> superuser createdb;
+    ALTER ROLE
+    postgres=# \du
+                                        List of roles
+    Role name  |                         Attributes                         | Member of
+    ------------+------------------------------------------------------------+-----------
+    postgres   | Superuser, Create role, Create DB, Replication, Bypass RLS | {}
+    <username> | Superuser, Create DB                                       | {}
+   ```
 
 - `bundle exec rails c` not loading (no error, instead seems to not recognize command)
   - run: `bin/spring stop`

@@ -1,10 +1,23 @@
 [[ -s "$HOME/.local.bash_profile" ]] && source "$HOME/.local.bash_profile"
 
 # brew
-export PATH="/usr/local/sbin:$PATH"
+eval "$(/opt/homebrew/bin/brew shellenv)"
 
-# postgres
+# asdf version manager
+export PATH="${ASDF_DATA_DIR:-$HOME/.asdf}/shims:$PATH"
+
+# asdf postgres
 export PGHOST=localhost
+export PKG_CONFIG_PATH="/opt/homebrew/bin/pkg-config:$(brew --prefix icu4c)/lib/pkgconfig:$(brew --prefix curl)/lib/pkgconfig:$(brew --prefix zlib)/lib/pkgconfig"
+
+# asdf ruby install
+# https://github.com/asdf-vm/asdf-ruby/issues/328#issuecomment-1650046559
+export RUBY_CONFIGURE_OPTS="
+  --with-zlib-dir=$(brew --prefix zlib)
+  --with-openssl-dir=$(brew --prefix openssl@3)
+  --with-readline-dir=$(brew --prefix readline)
+  --with-libyaml-dir=$(brew --prefix libyaml)
+"
 
 reload() { . ~/.bash_profile; }
 home() { cd ~; }
@@ -18,7 +31,6 @@ mime() { file -b --mime "$@"; }
 
 # editors
 atom() { atom .; }
-tmate() { mate .; }
 sub() { sublime .; }
 vs() { code .; }
 vslist() { code --list-extensions; }
@@ -102,8 +114,3 @@ function getpostgis () {
     cd ../..
     rm -rf tmp/
 }
-
-# asdf for language version management
-. $(brew --prefix asdf)/libexec/asdf.sh
-
-. $(brew --prefix asdf)/etc/bash_completion.d/asdf.bash
