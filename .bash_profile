@@ -19,6 +19,10 @@ export RUBY_CONFIGURE_OPTS="
   --with-libyaml-dir=$(brew --prefix libyaml)
 "
 
+# GPG
+# error: gpg: signing failed: Inappropriate ioctl for device
+export GPG_TTY=$(tty)
+
 reload() { . ~/.bash_profile; }
 home() { cd ~; }
 finder() { open -a Finder ./; }
