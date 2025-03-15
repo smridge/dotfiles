@@ -10,11 +10,18 @@ export PATH="${ASDF_DATA_DIR:-$HOME/.asdf}/shims:$PATH"
 export PGHOST=localhost
 export PKG_CONFIG_PATH="/opt/homebrew/bin/pkg-config:$(brew --prefix icu4c)/lib/pkgconfig:$(brew --prefix curl)/lib/pkgconfig:$(brew --prefix zlib)/lib/pkgconfig"
 
+## install older ruby versions
+# https://github.com/rbenv/ruby-build/discussions/2185#discussioncomment-11907180
+# For ruby 2.6, 2.7, 3.0:
+# RUBY_APPLY_PATCHES="https://github.com/ruby/ruby/commit/1dfe75b0beb7171b8154ff0856d5149be0207724.patch" asdf install ruby 3.0.7
+#
+# For ruby 2.5:
+# RUBY_CFLAGS=-DUSE_FFI_CLOSURE_ALLOC asdf install ruby 2.5.9
+
 # asdf ruby install
 # https://github.com/asdf-vm/asdf-ruby/issues/328#issuecomment-1650046559
 export RUBY_CONFIGURE_OPTS="
   --with-zlib-dir=$(brew --prefix zlib)
-  --with-openssl-dir=$(brew --prefix openssl@3)
   --with-readline-dir=$(brew --prefix readline)
   --with-libyaml-dir=$(brew --prefix libyaml)
 "
