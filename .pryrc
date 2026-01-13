@@ -111,43 +111,48 @@ def rand_string length
   SecureRandom.alphanumeric(length)
 end
 
-# https://stackoverflow.com/a/9782550/7477016
-def git_stats(sort: :total)
-  impact = {}
+# extended from https://stackoverflow.com/a/9782550/7477016
+def git_stats(sort: :commits, group_by: :name)
+  contributors = {}
+  author_group = group_by == :email ? "e" : "n"
 
-  IO.popen("git log --pretty=format:\"%an\" --shortstat #{ARGV.join(' ')}") do |file|
-    prev_line = ''
-    while (line = file.gets)
-      changes = /(\d+) insertion.* (\d+) deletion/.match(line)
+  git_logs = `git log --pretty=format:\"%a#{author_group}\" --shortstat --no-merges #{ARGV.join(' ')}`
+  entries = git_logs.split(/\n{2}/)
 
-      if changes
-        impact[prev_line] ||= {}
-        impact[prev_line][:additions] ||= 0
-        impact[prev_line][:additions] += changes[1].to_i
-        impact[prev_line][:deletions] ||= 0
-        impact[prev_line][:deletions] += changes[2].to_i
-        impact[prev_line][:total] ||= 0
-        impact[prev_line][:total] += changes[1].to_i + changes[2].to_i
-        impact[prev_line][:diff] ||= 0
-        impact[prev_line][:diff] += changes[1].to_i - changes[2].to_i
-      end
+  entries.each do |entry|
+    author = /.*(?=\n)/.match(entry)[0]
+    commit = /(\d+) file/.match(entry)
+    insertions = /(\d+) insertion.*/.match(entry)
+    deletions = /(\d+) deletion.*/.match(entry)
 
-      prev_line = line # Names are on a line of their own, just before the stats
-    end
+    contributors[author] ||= {
+      commits: 0,
+      additions: 0,
+      deletions: 0
+    }
+
+    contributors[author][:commits] += 1 if commit
+    contributors[author][:additions] += insertions[1].to_i if insertions
+    contributors[author][:deletions] += deletions[1].to_i if deletions
   end
 
-  impact.each do |author, hash|
+  contributors.each do |author, hash|
+    hash[:total] = hash[:additions].to_i + hash[:deletions].to_i
+    hash[:diff] = hash[:additions].to_i - hash[:deletions].to_i
     hash[:deletion_percent] = (hash[:deletions].fdiv(hash[:total]) * 100).round(2)
     hash[:addition_percent] = (hash[:additions].fdiv(hash[:total]) * 100).round(2)
   end
 
-  impact.transform_keys! { |key| key.strip.downcase }
+  contributors.transform_keys! { |key| key.strip.downcase }
+
+  min_author_length = contributors.keys.max_by(&:length)&.size.to_i + 2
 
   $stdout.puts(
     format(
-      "%<author>-40s %<additions>-11s %<deletions>-11s %<diff>-10s %<total>-10s %<deletion_percent>-10s %<addition_percent>-10s",
+      "%<author>-#{min_author_length}s %<commits>-10s %<additions>-11s %<deletions>-11s %<diff>-10s %<total>-10s %<deletion_percent>-10s %<addition_percent>-10s",
       {
         author: "author",
+        commits: "commits",
         additions: "inserts",
         deletions: "deletes",
         total: "total",
@@ -158,15 +163,16 @@ def git_stats(sort: :total)
     )
   )
 
-  $stdout.puts "-" * 106
+  $stdout.puts "-" * (min_author_length + 77)
 
   if sort == :author
-    impact.sort_by { |author, _hash| author }.each do |author, hash|
+    contributors.sort_by { |author, _hash| author }.each do |author, hash|
       $stdout.puts(
         format(
-          "%<author>-40s +%<additions>-10s -%<deletions>-10s %<diff>-10s %<total>-10s %<deletion_percent>-10s %<addition_percent>-10s",
+          "%<author>-#{min_author_length}s %<commits>-10s +%<additions>-10s -%<deletions>-10s %<diff>-10s %<total>-10s %<deletion_percent>-10s %<addition_percent>-10s",
           {
             author: author,
+            commits: hash[:commits],
             additions: hash[:additions],
             deletions: hash[:deletions],
             total: hash[:total],
@@ -178,12 +184,13 @@ def git_stats(sort: :total)
       )
     end
   else
-    impact.sort_by { |_author, hash| hash[sort] }.reverse_each do |author, hash|
+    contributors.sort_by { |_author, hash| hash[sort] }.reverse_each do |author, hash|
       $stdout.puts(
         format(
-          "%<author>-40s +%<additions>-10s -%<deletions>-10s %<diff>-10s %<total>-10s %<deletion_percent>-10s %<addition_percent>-10s",
+          "%<author>-#{min_author_length}s %<commits>-10s +%<additions>-10s -%<deletions>-10s %<diff>-10s %<total>-10s %<deletion_percent>-10s %<addition_percent>-10s",
           {
             author: author,
+            commits: hash[:commits],
             additions: hash[:additions],
             deletions: hash[:deletions],
             total: hash[:total],
