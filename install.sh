@@ -20,10 +20,6 @@ brew install curl
 brew install ossp-uuid
 brew install pkg-config
 
-## redis
-brew install redis
-brew services start redis
-
 ## language version management
 brew install coreutils
 brew install asdf
@@ -43,6 +39,18 @@ asdf install postgres latest
 ## install yarn
 asdf plugin add yarn
 asdf install yarn latest
+
+## install redis
+asdf plugin add redis
+asdf install redis latest
+
+## install rust
+asdf plugin add rust
+asdf install rust latest
+
+## install python
+asdf plugin add python
+asdf install python latest
 
 
 ## install apps - https://formulae.brew.sh/cask/
