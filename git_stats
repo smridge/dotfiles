@@ -30,7 +30,9 @@
 #
 # Examples:
 #   * $HOME/git_stats
-#   * $HOME/git_stats --group-by name --sort inserts --start-date "2025-01" --end-date "2025-12"
+#   * $HOME/git_stats --group-by email --sort commits (default)
+#   * $HOME/git_stats --group-by name --sort inserts --start-date 2025-01-01 --end-date 2025-12-31
+#   * $HOME/git_stats --start-date 2025-01-01 --end-date 2025-12-31
 
 require 'optparse'
 
