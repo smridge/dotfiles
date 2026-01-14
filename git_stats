@@ -7,106 +7,91 @@
 
 # chmod +x $HOME/git_stats
 
+# git stats across a single repo or multiple repos in a directory
+#
+# To install:
+#   * place this file in a directory on your PATH (e.g. $HOME)
+#   * ensure it is executable (chmod +x $HOME/git_stats)
+#
+# Requirements:
+#   * navigate to a repo or directory with multiple repos
+#   * run `$HOME/git_stats` to see a summary of contributions across all repositories
+#   * optional arguments are available (see --help)
+#
+# Usage:
+#   * via executable: git_stats [options]
+#   * via ruby: ruby git_stats [options]
+# Options:
+#   * = default
+#     -g, --group-by [GROUP]           Author: name, email*
+#     -S, --sort [SORT]                Descending: inserts, deletes, total, diff, author, commits*
+#     -s, --start-date [DATE]          Commits starting on
+#     -e, --end-date [DATE]            Commits ending on
+#
+# Examples:
+#   * $HOME/git_stats
+#   * $HOME/git_stats --group-by name --sort inserts --start-date "2025-01" --end-date "2025-12"
+
 require 'optparse'
 
 class GitStats
   attr_reader :options
-  attr_accessor :contributors
+  attr_accessor :data
 
-  def initialize
-    @contributors = {}
-    @options = define_options
+  def initialize(args: ::ARGV)
+    @options = define_options(args: args)
+    @data = {
+      contributors: {},
+      totals: {
+        author: 0,
+        commits: 0,
+        inserts: 0,
+        deletes: 0,
+        diff: 0,
+        total: 0,
+        deletion_percent: 0.0,
+        addition_percent: 0.0
+      }
+    }
   end
 
   def report
-    contributions
+    git_contributions
+    git_author_totals
+    format_authors
+    git_repo_totals
     min_author_width
     author_output
     final_output
   end
 
-  def contributions
-    git_combined_logs.each do |entry|
-      author = /.*(?=\n)/.match(entry)[0]
-      commit = /(\d+) file/.match(entry)
-      insertions = /(\d+) insertion.*/.match(entry)
-      deletions = /(\d+) deletion.*/.match(entry)
-
-      contributors[author] ||= {
-        commits: 0,
-        inserts: 0,
-        deletes: 0
-      }
-
-      contributors[author][:commits] += 1 if commit
-      contributors[author][:inserts] += insertions[1].to_i if insertions
-      contributors[author][:deletes] += deletions[1].to_i if deletions
-    end
-
-    contributors.each do |_author, hash|
-      hash[:total] = hash[:inserts].to_i + hash[:deletes].to_i
-      hash[:diff] = hash[:inserts].to_i - hash[:deletes].to_i
-      hash[:deletion_percent] = (hash[:deletes].fdiv(hash[:total]) * 100).round(2)
-      hash[:addition_percent] = (hash[:inserts].fdiv(hash[:total]) * 100).round(2)
-    end
-  end
-
   def author_output
-    contributors.transform_keys! { |key| key.strip.downcase }
-
     horizontal_line
 
     $stdout.puts(
       format(
         puts_format,
-        {
-          author: 'author',
-          commits: 'commits',
-          inserts: 'inserts',
-          deletes: 'deletes',
-          total: 'total',
-          diff: 'diff',
-          deletion_percent: 'delete %',
-          addition_percent: 'insert %'
-        }
+        puts_format_header_references
       )
     )
 
     horizontal_line
 
     if options[:sort] == :author
-      contributors.sort_by { |author, _hash| author }.each do |author, hash|
+      data[:contributors].sort_by { |author, _hash| author }.each do |author, hash|
         $stdout.puts(
           format(
             puts_format,
-            {
-              author: author,
-              commits: num_with_separator(hash[:commits]),
-              inserts: num_with_separator(hash[:inserts]),
-              deletes: num_with_separator(hash[:deletes]),
-              total: num_with_separator(hash[:total]),
-              diff: num_with_separator(hash[:diff]),
-              deletion_percent: hash[:deletion_percent],
-              addition_percent: hash[:addition_percent]
-            }
+            puts_format_author_references(author, hash)
           )
         )
       end
     else
-      contributors.sort_by { |_author, hash| hash[options[:sort]] }.reverse_each do |author, hash|
+      data[:contributors].sort_by { |_author, hash| hash[options[:sort]] }.reverse_each do |author, hash|
         $stdout.puts(
           format(
             puts_format,
-            {
-              author: author,
-              commits: num_with_separator(hash[:commits]),
-              inserts: num_with_separator(hash[:inserts]),
-              deletes: num_with_separator(hash[:deletes]),
-              total: num_with_separator(hash[:total]),
-              diff: num_with_separator(hash[:diff]),
-              deletion_percent: hash[:deletion_percent],
-              addition_percent: hash[:addition_percent]
-            }
+            puts_format_author_references(author, hash)
           )
         )
       end
@@ -114,25 +99,12 @@ class GitStats
   end
 
   def final_output
-    total = contributors.map { |_author, hash| hash[:total] }.sum
-    all_deletes = contributors.map { |_author, hash| hash[:deletes] }.sum
-    all_inserts = contributors.map { |_author, hash| hash[:inserts] }.sum
-
     horizontal_line
 
     $stdout.puts(
       format(
         puts_format,
-        {
-          author: "#{contributors.size} authors",
-          commits: num_with_separator(contributors.map { |_author, hash| hash[:commits] }.sum),
-          inserts: num_with_separator(all_inserts),
-          deletes: num_with_separator(all_deletes),
-          diff: num_with_separator(contributors.map { |_author, hash| hash[:diff] }.sum),
-          total: num_with_separator(contributors.map { |_author, hash| hash[:total] }.sum),
-          deletion_percent: (all_deletes.fdiv(total) * 100).round(2),
-          addition_percent: (all_inserts.fdiv(total) * 100).round(2)
-        }
+        puts_format_totals_references
       )
     )
 
@@ -141,7 +113,7 @@ class GitStats
 
   private
 
-  def define_options(args: ::ARGV)
+  def define_options(args: [])
     options = {
       sort: :commits,
       group_by: 'ae' # author email
@@ -182,7 +154,57 @@ class GitStats
 
   # ------------------------------------------------------------
   #
-  # git methods
+  # git calculation methods
+  #
+  # ------------------------------------------------------------
+
+  def git_contributions
+    git_combined_logs.each do |entry|
+      author = /.*(?=\n)/.match(entry)[0]
+      commit = /(\d+) file/.match(entry)
+      insertions = /(\d+) insertion.*/.match(entry)
+      deletions = /(\d+) deletion.*/.match(entry)
+
+      contributor = data[:contributors][author] ||= {
+        commits: 0,
+        inserts: 0,
+        deletes: 0
+      }
+
+      contributor[:commits] += 1 if commit
+      contributor[:inserts] += insertions[1].to_i if insertions
+      contributor[:deletes] += deletions[1].to_i if deletions
+    end
+  end
+
+  def git_author_totals
+    data[:contributors].each_value do |hash|
+      hash[:total] = hash[:inserts] + hash[:deletes]
+      hash[:diff] = hash[:inserts] - hash[:deletes]
+      hash[:deletion_percent] = (hash[:deletes].fdiv(hash[:total]) * 100).round(2)
+      hash[:addition_percent] = (hash[:inserts].fdiv(hash[:total]) * 100).round(2)
+    end
+  end
+
+  def git_repo_totals
+    total = data[:contributors].map { |_author, hash| hash[:total] }.sum
+    all_deletes = data[:contributors].map { |_author, hash| hash[:deletes] }.sum
+    all_inserts = data[:contributors].map { |_author, hash| hash[:inserts] }.sum
+
+    totals = data[:totals]
+    totals[:author] = data[:contributors].size
+    totals[:commits] = data[:contributors].map { |_author, hash| hash[:commits] }.sum
+    totals[:inserts] = all_inserts
+    totals[:deletes] = all_deletes
+    totals[:diff] = data[:contributors].map { |_author, hash| hash[:diff] }.sum
+    totals[:total] = total
+    totals[:deletion_percent] = (all_deletes.fdiv(total) * 100).round(2)
+    totals[:addition_percent] = (all_inserts.fdiv(total) * 100).round(2)
+  end
+
+  # ------------------------------------------------------------
+  #
+  # git command helper methods
   #
   # ------------------------------------------------------------
 
@@ -230,8 +252,12 @@ class GitStats
   #
   # ------------------------------------------------------------
 
+  def format_authors
+    data[:contributors].transform_keys! { |key| key.strip.downcase }
+  end
+
   def min_author_width
-    @min_author_width ||= contributors.keys.max_by(&:length)&.size.to_i + 2
+    @min_author_width ||= data[:contributors].keys.max_by(&:length)&.size.to_i + 2
   end
 
   def horizontal_line
@@ -244,6 +270,47 @@ class GitStats
       '+%<inserts>-10s -%<deletes>-10s ' \
       '%<diff>-10s %<total>-10s ' \
       '%<deletion_percent>-10s %<addition_percent>-10s'
+  end
+
+  def puts_format_header_references
+    {
+      author: 'author',
+      commits: 'commits',
+      inserts: 'inserts',
+      deletes: 'deletes',
+      total: 'total',
+      diff: 'diff',
+      deletion_percent: 'delete %',
+      addition_percent: 'insert %'
+    }
+  end
+
+  def puts_format_author_references(author, hash)
+    {
+      author: author,
+      commits: num_with_separator(hash[:commits]),
+      inserts: num_with_separator(hash[:inserts]),
+      deletes: num_with_separator(hash[:deletes]),
+      total: num_with_separator(hash[:total]),
+      diff: num_with_separator(hash[:diff]),
+      deletion_percent: hash[:deletion_percent],
+      addition_percent: hash[:addition_percent]
+    }
+  end
+
+  def puts_format_totals_references
+    totals = data[:totals]
+
+    {
+      author: "#{totals[:author]} authors",
+      commits: num_with_separator(totals[:commits]),
+      inserts: num_with_separator(totals[:inserts]),
+      deletes: num_with_separator(totals[:deletes]),
+      diff: num_with_separator(totals[:diff]),
+      total: num_with_separator(totals[:total]),
+      deletion_percent: totals[:deletion_percent],
+      addition_percent: totals[:addition_percent]
+    }
   end
 
   def num_with_separator(number, separator: ',')
